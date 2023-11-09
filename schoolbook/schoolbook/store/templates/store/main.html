@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'new.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <header>
+      <span class ="openbtn" onclick="openNav()">&#9776;</span> 
+      
+      <div calss = "phonebar">
+        <div id="myNav" class="overlay">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+          <div class="overlay-content">
+            <form action=''>
+              <input class="search-phone" style="color: #000000;" type="search"   placeholder="" aria-label="Search" name="search">
+              <button class="searchbtn-phone" type="submit">Искать</button>
+            </form>
+            <a class="head-link" href="{% url 'store:home' %}">главная</a>
+        
+            {% if user.is_authenticated %}
+              <a class="head-link" href="{% url 'store:create' %}">создать объявление</a>
+              <a class="head-link" href="{% url 'store:logout' %}">выйти</a>
+              <a class="head-link" href="/user/?name={{user.username}}">{{user.username}}</a>      
+            {% else %}
+              <a class="head-link" href="{% url 'store:login' %}">войти</a>
+              <a class="head-link" href="{% url 'store:register' %}">зарегистрироваться</a>
+            {% endif %}
+          </div>
+          
+        </div>
+        <a class="head-link" href="{% url 'store:home' %}"><h1 class = "logo">re.Book</h1></a>
+      </div>
+
+      <div class = "computerbar">
+        
+        <a class="head-link" href="{% url 'store:home' %}">главная</a>
+        |
+            
+        {% if user.is_authenticated %}
+          <a class="head-link" href="{% url 'store:create' %}">создать объявление</a>
+          | 
+          <a class="head-link" href="{% url 'store:logout' %}">выйти</a>
+          |
+          <a class="head-link" href="/user/?name={{user.username}}">{{user.username}}</a>      
+        {% else %}
+          <a class="head-link" href="{% url 'store:login' %}">войти</a>
+          |
+          <a class="head-link" href="{% url 'store:register' %}">зарегистрироваться</a>
+        {% endif %}
+        |
+        <form action=''>
+          <input class="search-phone" type="search"   style="color: #000000;" placeholder="" aria-label="Search" name="search">
+          <button class="searchbtn-phone" type="submit">Искать</button>
+        </form>
+      </div>  
+          
+      
+  
+      
+      
+
+      
+    </header>
+    
+    
+
+    {% block text %}{% endblock %}
+
+
+    <script>
+      function openNav() {
+        document.getElementById("myNav").style.width = "100%";
+      }
+      
+      function closeNav() {
+        document.getElementById("myNav").style.width = "0%";
+      }
+    </script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block title %}
+{{ Title }}
+{% endblock %}
+
+{% block text %}
+
+  <h1 style="padding-left: 80px;">Войти </h1>
+  <div class = "all">
+    <form method="POST">
+      {% csrf_token %}
+      <div class = "application" style="height: 200px; padding-top: 12px; ">
+      имя пользователя:{{ login_form.username }}</br>
+      пароль: {{ login_form.password }}</br>
+      <button class="btn btn-primary" type="submit" style="margin-top: 20px;">Войти</button>
+      </div>
+    </form>
+  </div>
+  <div class = "all">
+  <p class="text-center">Нет аккаунта? <a href="/register" style="text-decoration: underline;">создать</a>.</p>
+  </div>
+{% endblock %}
+

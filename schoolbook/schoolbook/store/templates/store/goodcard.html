@@ -1,0 +1,42 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{{ ID }}
+{% block title %}
+{{ Title }}
+{% endblock %}
+
+{% block text %}
+    {% if books %}
+        {%for elm in books %}
+            {%if elm.id == ID %}
+                
+            <div class = "all" style = "margin-top: 48px; padding-bottom: 48px;">
+                <div class = application style="height: auto;">
+                    <div class=app-content>
+                        <a href="/card/?id={{elm.id}}">
+                        {% if Name == 0 %}
+                            <img src='../{{ elm.image }}' alt=" " >
+                        {% else %}
+                            <img src='../{{ elm.image }}' alt=" " >
+                        {%endif%}
+                        <div class = "info">
+                            <div class = "name">{{elm.name}}</br> </div><div class = "price">{{ elm.price}}руб</br></div> <div class = "a">{{ elm.author }}  </br></div><div class = "paY">{{elm.publisher}} | {{elm.year}}</div>
+                            <div class = 'description'>{{ elm.description }}</div>
+                            <a href="/user/?name={{elm.owner}}"><div class = 'ownersinfo'>{{ elm.owner }}</br>@{{ elm.ownerscontact }}</div></a>
+                            {% if elm.owner == user.username and Name != 0%}
+                            <a class="delete" href="delete/{{ elm.id }}" class="delete" >удалить</a>
+
+                            {% endif %}
+                        </div>
+                        </a>
+                        
+                    </div>
+                </div> 
+            </div> 
+
+            
+                
+            {% endif %}
+        {% endfor %}
+    {%endif%}
+{% endblock %}

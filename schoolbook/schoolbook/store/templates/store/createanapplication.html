@@ -1,0 +1,50 @@
+{% extends 'store/main.html' %}
+
+{% block title %}
+Создать объявление
+{% endblock %}
+
+{% block text %}
+
+    <h1 style="padding-left: 80px;" >Добавить книгу</h1>
+    <div class = 'all'>
+    <form method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        <div class = 'owner'>
+          <label for="owner"></label>
+          <input id="owner" type="text" name="owner" maxlength="100" required value="{{user.username}}" readonly >
+          <label for="ownerscontact"></label>
+          {% if user.last_name %}
+          <input id="ownerscontact" type="text" name="ownerscontact" maxlength="100" required value="{{user.last_name}}" readonly >
+          {% else %}
+          <input id="ownerscontact" type="text" name="ownerscontact" maxlength="100" required value="{{user.email}}" readonly >
+          {%endif%}
+          <label for="status"></label>
+          <input id="status" type="text" name="status" maxlength="100" required value="avb" readonly >
+        </div>
+        <div class = 'application' style="padding-top: 50px; height: 450px;">
+        {{ form.image }}
+        <div class = "info" style="gap: 12px;">
+        {{ form.name }}
+        {{ form.price }}
+        {{ form.description }}
+        {{ form.author }}
+        {{ form.year }}
+        {{ form.publisher }}
+        </div>
+       
+        
+        <button type="submit" style="margin-top: 8px;">Добавить</button>
+        </div>
+
+
+
+    </form>
+    {% if img_obj %}
+      <h3>Succesfully uploaded : {{img_obj.title}}</h3>
+      <img src="{{ img_obj.image.url}}" alt="connect" style="max-height:300px">
+    {% endif %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,30 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block title %}
+{{ Title }}
+{% endblock %}
+
+{% block text %}
+	<h1 style="padding-left: 80px;">Регистрация</h1>
+	<div class = "all">	
+		<form method="POST">
+				
+			{% csrf_token %}
+			
+				<div class = 'application' style="height: 350px; padding-top: 12px;">
+					имя пользователя: {{ register_form.username }} </br>
+					ваш телеграм: {{ register_form.last_name }} </br>
+					пароль: {{ register_form.password1 }} </br>
+					пароль (повтор): {{ register_form.password2 }} </br>
+
+					<button class="submit" type="submit" style="margin-top: 20px;">Регистрация</button>
+				</div>
+			
+		</form>
+	</div>	
+	<div class = "all">	
+	<p class="text-center">Если у вас цжк ксть аккаунт: <a href="/login" style="text-decoration: underline;">вйоти</a></p>
+	</div>
+	
+{% endblock %}
+

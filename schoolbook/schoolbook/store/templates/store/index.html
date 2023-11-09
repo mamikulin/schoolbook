@@ -1,0 +1,60 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{{ Name }}
+{% block title %}
+{{ Title }}
+{% endblock %}
+
+{% block text %}
+    <div class = ownersinfo style="padding-top: 48px; padding-left: 80px;">
+        {% if Name != 0%}
+            {%for elm in books %}
+                {%if elm.owner == Name%}
+                    {% if elm.owner %}
+                        
+                    <a href="/user/?name={{elm.owner}}"><div class = 'ownersinfo'>Имя:{{ elm.owner }}<a href="https://t.me/{{elm.ownerscontact}}"  target="_blank"></br>Телеграм:@{{ elm.ownerscontact }}</a></div></a>
+                    {%endif%}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+    {% if Name != 0%}
+        <h1 style="padding-left: 80px;"> Книги пользователя: </h1>
+    {% endif %}
+    <div class = 'all' style="padding-bottom: 48px;">
+    {% if books %}
+        {%for elm in books %}
+            {%if elm.owner == Name or Name == 0 %}
+                {% if elm.status != del or elm.status == NULL %}
+                <div class = application>
+                    <div class=app-content>
+                        <a href="/card/?id={{elm.id}}">
+                        {% if Name == 0 %}
+                            <img src='../{{ elm.image }}' alt=" " >
+                        {% else %}
+                            <img src='../{{ elm.image }}' alt=" " >
+                        {%endif%}
+                        <div class = "info">
+                            <div class = "name">{{elm.name}}</br> </div><div class = "price">{{ elm.price}}руб</br></div> <div class = "a">{{ elm.author }}  </br></div><div class = "paY">{{elm.publisher}} | {{elm.year}}</div>
+                            {% if elm.owner == user.username and Name != 0%}
+                            <a class="delete" href="delete/{{ elm.id }}" class="delete" >удалить</a>
+
+                            {% endif %}
+                        
+                        </div>
+                        </a>
+                        
+                    </div>
+                </div> 
+                {%endif%}
+            {% endif %}
+    
+            
+        {% endfor %}
+    </div>    
+    {% else %}
+    
+        <p>здесь пустовато...</p>
+    {%endif%}
+{% endblock %}
+
